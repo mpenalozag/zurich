@@ -49,3 +49,7 @@ group :development, :test do
 
   gem "rspec-rails"
 end
+
+gem 'sorbet', :group => :development
+gem 'sorbet-runtime'
+gem 'tapioca', '~> 0.17.0', require: false, :group => :development

@@ -30,7 +30,7 @@ module Zurich
     config.api_only = true
 
     config.generators do |g|
-      g.test_framework :rspec,
+      g.test_framework :rspec
     end
   end
 end
