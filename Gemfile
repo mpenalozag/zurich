@@ -58,3 +58,5 @@ gem 'tapioca', '~> 0.17.0', require: false, :group => :development
 gem 'sidekiq'
 
 gem "ruby-openai", "~> 8.1"
+
+gem "dotenv-rails", "~> 3.1", :group => :development, :group => :test
