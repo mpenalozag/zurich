@@ -100,5 +100,8 @@ module GeneratedUrlHelpersModule
   def sidekiq_web_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def stories_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
 end
