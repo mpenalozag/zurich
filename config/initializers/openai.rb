@@ -1,4 +1,6 @@
-OpenAI.configure do |config|
-  config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
-  config.log_errors = true
+unless Rails.env.test?
+  OpenAI.configure do |config|
+    config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
+    config.log_errors = true
+  end
 end
