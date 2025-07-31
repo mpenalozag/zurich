@@ -56,3 +56,5 @@ gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
 gem 'tapioca', '~> 0.17.0', require: false, :group => :development
 gem 'sidekiq'
+
+gem "ruby-openai", "~> 8.1"
