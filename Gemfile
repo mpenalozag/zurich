@@ -59,4 +59,4 @@ gem 'sidekiq'
 
 gem "ruby-openai", "~> 8.1"
 
-gem "dotenv-rails", "~> 3.1", :group => :development, :group => :test
+gem "dotenv-rails", "~> 3.1", :group => :development
