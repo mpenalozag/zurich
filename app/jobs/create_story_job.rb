@@ -6,6 +6,6 @@ class CreateStoryJob < ApplicationJob
 
   sig { params(prompt: String).void }
   def perform(prompt)
-    Rails.logger.info("Creating story with prompt: #{prompt}")
+    Stories::CreateStory.new(prompt).run
   end
 end
