@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require Rails.root.join('spec/services/concerns/storage_service_spec')
+
 RSpec.describe Storage::LocalService do
   let(:service) { described_class.new }
   let(:image) { 'some_image_binary' }
@@ -11,6 +13,8 @@ RSpec.describe Storage::LocalService do
     stub_const('Storage::LocalService::BASE_FOLDER', 'cool_folder')
     stub_const('Storage::LocalService::IMAGE_FOLDER', 'cool_image_folder')
   end
+
+  it_behaves_like 'storage_service'
 
   describe 'constants' do
     it 'has the correct folders' do
