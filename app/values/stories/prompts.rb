@@ -47,7 +47,7 @@ module Stories
     GET_IMAGE_FROM_DESCRIPTION_ROLE = <<~PROMPT
       You are a story writer for a children's book. You are given a description of a character and a drawing style.
       You must generate an image of the character in the given drawing style.
-      The image must be a representation of the character.
+      The image must be a representation of the character and must contain only the character.
     PROMPT
   end
 end
