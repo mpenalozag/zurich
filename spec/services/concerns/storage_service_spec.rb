@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-# Method of utilization 
+# Method of utilization
 
 # require the route -- require Rails.root.join('spec/services/concerns/storage_service_spec')
 # Then just do it_behaves_like "storage_service"

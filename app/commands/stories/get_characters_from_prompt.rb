@@ -7,7 +7,7 @@ class Stories::GetCharactersFromPrompt < Command
   def initialize(story_prompt)
     @story_prompt = story_prompt
   end
-  
+
   private
 
   sig { returns(T::Hash[T.untyped, T.untyped]) }

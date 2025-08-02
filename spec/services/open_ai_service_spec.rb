@@ -55,7 +55,7 @@ RSpec.describe OpenAiService do
             Stories::Prompts::GET_CHARACTERS_FROM_PROMPT_SYSTEM_ROLE,
             { role: "user", content: prompt }
           ],
-          temperature: 0.7,
+          temperature: 0.7
         }
       )
     end
@@ -104,7 +104,7 @@ RSpec.describe OpenAiService do
             { role: "user", content: prompt },
             { role: "user", content: characters.to_json }
           ],
-          temperature: 0.7,
+          temperature: 0.7
         }
       )
     end

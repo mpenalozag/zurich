@@ -18,11 +18,11 @@ RSpec.describe Stories::GetCharactersFromPrompt do
   describe '#execute' do
     before do
       allow(mock_openai_service).to receive(:get_characters_from_prompt).and_return(
-        '{ 
+        '{
           "characters": [
-            { "name": "big cat", "description": "A big cat" }, 
+            { "name": "big cat", "description": "A big cat" },
             { "name": "mouse", "description": "A mouse" }
-          ] 
+          ]
         }'
       )
     end
@@ -34,17 +34,17 @@ RSpec.describe Stories::GetCharactersFromPrompt do
 
     it 'returns the characters from the prompt' do
       expect(perform).to eq(
-        { 
+        {
           "characters" => [
-            { 
-              "name" => "big cat", 
-              "description" => "A big cat" 
-            }, 
-            { 
-              "name" => "mouse", 
-              "description" => "A mouse" 
+            {
+              "name" => "big cat",
+              "description" => "A big cat"
+            },
+            {
+              "name" => "mouse",
+              "description" => "A mouse"
             }
-          ] 
+          ]
         }
       )
     end

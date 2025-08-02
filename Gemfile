@@ -49,16 +49,16 @@ group :development, :test do
 
   gem "rspec-rails"
 
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 end
 
-gem 'sorbet', :group => :development
-gem 'sorbet-runtime'
-gem 'tapioca', '~> 0.17.0', require: false, :group => :development
-gem 'sidekiq'
+gem "sorbet", group: :development
+gem "sorbet-runtime"
+gem "tapioca", "~> 0.17.0", require: false, group: :development
+gem "sidekiq"
 
 gem "ruby-openai", "~> 8.1"
 
-gem "dotenv-rails", "~> 3.1", :group => :development
+gem "dotenv-rails", "~> 3.1", group: :development
 
 gem "httparty", "~> 0.23.1"

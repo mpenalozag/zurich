@@ -3,10 +3,10 @@
 module StorageService
   extend T::Sig
   extend T::Helpers
-  
+
   interface!
 
-  sig { abstract.params(image: String, path: String).void }
+  sig { abstract.params(image: String, path: String).returns(String) }
   def store_image(image, path); end
 
   sig { abstract.params(path: String).returns(T.nilable(String)) }

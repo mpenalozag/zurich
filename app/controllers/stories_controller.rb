@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
 
   sig { void }
   def create
-    CreateStoryJob.perform_later(params[:prompt])
+    CreateStoryJob.perform_later(params[:story_prompt], params[:drawing_style])
     render json: { message: "Story creation started" }, status: :accepted
   end
 end
