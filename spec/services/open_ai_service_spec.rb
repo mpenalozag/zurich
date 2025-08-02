@@ -5,6 +5,19 @@ require 'rails_helper'
 RSpec.describe OpenAiService do
   before do
     stub_const("ENV", { "OPENAI_ACCESS_TOKEN" => "test_token" })
+    stub_const("OpenAiService::API_BASE_URL", "https://api.openai.com/v1")
+    stub_const("OpenAiService::IMAGE_GENERATION_MODEL", "gpt-image-1")
+    stub_const("OpenAiService::TEXT_GENERATION_MODEL", "gpt-4.1-nano")
+    stub_const("OpenAiService::IMAGE_GENERATION_URL", "https://api.openai.com/v1/images/generations")
+  end
+
+  describe '#constants' do
+    it 'has the correct constants' do
+      expect(OpenAiService::API_BASE_URL).to eq("https://api.openai.com/v1")
+      expect(OpenAiService::IMAGE_GENERATION_MODEL).to eq("gpt-image-1")
+      expect(OpenAiService::TEXT_GENERATION_MODEL).to eq("gpt-4.1-nano")
+      expect(OpenAiService::IMAGE_GENERATION_URL).to eq("https://api.openai.com/v1/images/generations")
+    end
   end
 
   describe '#client' do
@@ -122,6 +135,42 @@ RSpec.describe OpenAiService do
         characters_message = messages.find { |msg| msg[:content].include?("John") }
         expect(characters_message[:content]).to eq(characters.to_json)
       end
+    end
+  end
+
+  describe '#get_image_from_description' do
+    let(:character_description) { "A brave knight with a sword" }
+    let(:drawing_style) { "cartoon" }
+    let(:expected_response) { "b64_image" }
+    let(:mock_response) { { "data" => [ { "b64_json" => expected_response } ] } }
+    let(:mock_client) { instance_double(OpenAI::Client) }
+
+    before do
+      allow(HTTParty).to receive(:post).and_return(mock_response)
+      stub_const("OpenAiService::IMAGE_GENERATION_URL", "https://some-url.com")
+      stub_const("Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE", "Some prompt\n")
+    end
+
+    it 'calls the OpenAI client with correct parameters' do
+      OpenAiService.get_image_from_description(character_description, drawing_style)
+
+      expect(HTTParty).to have_received(:post).with(
+        "https://some-url.com", {
+          body: {
+            model: "gpt-image-1",
+            prompt: "Some prompt\nA brave knight with a sword\nThe image should be a #{drawing_style} style",
+            n: 1,
+            output_format: "jpeg",
+            quality: "low",
+            size: "1024x1024"
+          }.to_json,
+          timeout: 120,
+          headers: {
+            "Authorization" => "Bearer test_token",
+            "Content-Type" => "application/json"
+          }
+        }
+      )
     end
   end
 end
