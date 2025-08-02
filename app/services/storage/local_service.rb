@@ -4,8 +4,8 @@ class Storage::LocalService
   extend T::Sig
   include StorageService
 
-  BASE_FOLDER = 'tmp'
-  IMAGE_FOLDER = 'images'
+  BASE_FOLDER = "tmp"
+  IMAGE_FOLDER = "images"
 
   sig { override.params(image: String, path: String).returns(String) }
   def store_image(image, path)
