@@ -43,5 +43,11 @@ module Stories
         You mustn't include any other text in your response, only the JSON.
       PROMPT
     }, T::Hash[Symbol, String])
+
+    GET_IMAGE_FROM_DESCRIPTION_ROLE = <<~PROMPT
+      You are a story writer for a children's book. You are given a description of a character and a drawing style.
+      You must generate an image of the character in the given drawing style.
+      The image must be a representation of the character.
+    PROMPT
   end
 end
