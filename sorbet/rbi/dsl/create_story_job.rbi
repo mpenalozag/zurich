@@ -9,13 +9,14 @@ class CreateStoryJob
   class << self
     sig do
       params(
-        prompt: ::String,
+        story_prompt: ::String,
+        drawing_style: ::String,
         block: T.nilable(T.proc.params(job: CreateStoryJob).void)
       ).returns(T.any(CreateStoryJob, FalseClass))
     end
-    def perform_later(prompt, &block); end
+    def perform_later(story_prompt, drawing_style, &block); end
 
-    sig { params(prompt: ::String).void }
-    def perform_now(prompt); end
+    sig { params(story_prompt: ::String, drawing_style: ::String).void }
+    def perform_now(story_prompt, drawing_style); end
   end
 end
