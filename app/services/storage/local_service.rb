@@ -7,16 +7,18 @@ class Storage::LocalService
   BASE_FOLDER = 'tmp'
   IMAGE_FOLDER = 'images'
 
-  sig { override.params(image: String, path: String).void }
+  sig { override.params(image: String, path: String).returns(String) }
   def store_image(image, path)
     timestamp = Time.current.strftime("%Y%m%d_%H%M%S_%L")
-    filename = "#{path}#{timestamp}.png"
+    filename = "#{path}#{timestamp}.jpeg"
     file_path = Rails.root.join(BASE_FOLDER, IMAGE_FOLDER, filename)
 
     FileUtils.mkdir_p(File.dirname(file_path))
     File.open(file_path, "wb") do |file|
       file.write(image)
     end
+
+    file_path.to_s
   end
 
   sig { override.params(path: String).returns(T.nilable(String)) }

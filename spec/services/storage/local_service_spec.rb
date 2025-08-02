@@ -25,7 +25,7 @@ RSpec.describe Storage::LocalService do
 
   describe '#store_image' do
     let(:mock_file) { instance_double(File) }
-    let(:expected_path) { Rails.root.join('cool_folder', 'cool_image_folder', 'some_path/20250101_120000_000.png') }
+    let(:expected_path) { Rails.root.join('cool_folder', 'cool_image_folder', 'some_path/20250101_120000_000.jpeg') }
     
     before do
       travel_to Time.zone.local(2025, 1, 1, 12, 0, 0)
