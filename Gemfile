@@ -62,3 +62,5 @@ gem "ruby-openai", "~> 8.1"
 gem "dotenv-rails", "~> 3.1", group: :development
 
 gem "httparty", "~> 0.23.1"
+
+gem "pry", "~> 0.15.2"
