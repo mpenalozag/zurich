@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CreateStoryJob, type: :job do
   let(:job) { CreateStoryJob.new }
-  let(:prompt) { "A story about a cat" }
+  let(:story_prompt) { "A story about a cat" }
+  let(:drawing_style) { "A drawing style" }
 
   describe "#perform" do
     before do
@@ -10,8 +11,8 @@ RSpec.describe CreateStoryJob, type: :job do
     end
 
     it "calls create story command" do
-      job.perform(prompt)
-      expect(Stories::CreateStory).to have_received(:new).with(prompt)
+      job.perform(story_prompt, drawing_style)
+      expect(Stories::CreateStory).to have_received(:new).with(story_prompt, drawing_style)
     end
   end
 end
