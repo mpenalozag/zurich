@@ -6,9 +6,9 @@ module StorageService
   
   interface!
 
-  sig { abstract.returns(T::Boolean) }
-  def store_image; end
+  sig { abstract.params(image: String, path: String).returns(T::Boolean) }
+  def store_image(image, path); end
 
-  sig { abstract.returns(T.nilable(String)) }
-  def retrieve_image; end
+  sig { abstract.params(path: String).returns(T.nilable(String)) }
+  def retrieve_image(path); end
 end
