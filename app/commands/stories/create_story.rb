@@ -24,6 +24,7 @@ class Stories::CreateStory < Command
       @story.failed!
       raise e
     end
+
     @story.created!
   end
 end
