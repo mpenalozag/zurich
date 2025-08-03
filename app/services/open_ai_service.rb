@@ -5,6 +5,7 @@ class OpenAiService
   IMAGE_GENERATION_MODEL = "gpt-image-1"
   TEXT_GENERATION_MODEL = "gpt-4.1-nano"
   IMAGE_GENERATION_URL = T.let("#{API_BASE_URL}/images/generations", String)
+  IMAGE_EDITING_URL = T.let("#{API_BASE_URL}/images/edits", String)
 
   class << self
     extend T::Sig
@@ -46,21 +47,44 @@ class OpenAiService
     end
 
     sig { params(character_description: String, drawing_style: String).returns(String) }
-    def get_image_from_description(character_description, drawing_style)
+    def get_character_image_from_description(character_description, drawing_style)
       style_string = "\nThe image should be a #{drawing_style} style"
+      prompt = Stories::Prompts::GET_CHARACTER_IMAGE_FROM_DESCRIPTION_ROLE + character_description + style_string
+
       response = HTTParty.post(IMAGE_GENERATION_URL,
         timeout: 120,
         headers: request_headers,
         body: {
           model: IMAGE_GENERATION_MODEL,
-          prompt: Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE + character_description + style_string,
+          prompt: prompt,
           n: 1,
           output_format: "jpeg",
           quality: "low",
           size: "1024x1024"
         }.to_json
       )
-      Rails.logger.info("The raw response from the image generation model is: #{response}")
+      response.dig("data", 0, "b64_json")
+    end
+
+    sig { params(image_description: String, characters: T::Array[String], drawing_style: String).returns(String) }
+    def get_chapter_image_based_on_description(image_description, characters, drawing_style)
+      style_string = "\nThe image should be a #{drawing_style} style"
+      characters_string = characters.join(", ")
+      characters_text = "\nThe image must contain the following characters: #{characters_string}"
+      prompt = Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE + image_description + style_string + characters_text
+
+      response = HTTParty.post(IMAGE_EDITING_URL,
+        timeout: 120,
+        headers: request_headers,
+        body: {
+          model: IMAGE_GENERATION_MODEL,
+          prompt: prompt,
+          n: 1,
+          output_format: "jpeg",
+          quality: "low",
+          size: "1024x1024"
+        }.to_json
+      )
       response.dig("data", 0, "b64_json")
     end
 

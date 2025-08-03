@@ -148,11 +148,11 @@ RSpec.describe OpenAiService do
     before do
       allow(HTTParty).to receive(:post).and_return(mock_response)
       stub_const("OpenAiService::IMAGE_GENERATION_URL", "https://some-url.com")
-      stub_const("Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE", "Some prompt\n")
+      stub_const("Stories::Prompts::GET_CHARACTER_IMAGE_FROM_DESCRIPTION_ROLE", "Some prompt\n")
     end
 
     it 'calls the OpenAI client with correct parameters' do
-      OpenAiService.get_image_from_description(character_description, drawing_style)
+      OpenAiService.get_character_image_from_description(character_description, drawing_style)
 
       expect(HTTParty).to have_received(:post).with(
         "https://some-url.com", {
@@ -171,6 +171,48 @@ RSpec.describe OpenAiService do
           }
         }
       )
+    end
+  end
+
+  describe '#get_chapter_image_based_on_description' do
+    let(:image_description) { "Johnny the cat and Jack the dog walking in the park" }
+    let(:characters) { [ 'Johnny', 'Jack' ] }
+    let(:drawing_style) { "cartoon" }
+    let(:expected_response) { "b64_image" }
+    let(:mock_response) { { "data" => [ { "b64_json" => expected_response } ] } }
+    let(:mock_client) { instance_double(OpenAI::Client) }
+
+    before do
+      allow(HTTParty).to receive(:post).and_return(mock_response)
+      stub_const("OpenAiService::IMAGE_EDITING_URL", "https://some-url.com")
+      stub_const("Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE", "Some prompt\n")
+    end
+
+    it 'calls the OpenAI client with correct parameters' do
+      OpenAiService.get_chapter_image_based_on_description(image_description, characters, drawing_style)
+
+      expect(HTTParty).to have_received(:post).with(
+        "https://some-url.com", {
+          body: {
+            model: "gpt-image-1",
+            prompt: "Some prompt\nJohnny the cat and Jack the dog walking in the park\nThe image should be a #{drawing_style} style\nThe image must contain the following characters: Johnny, Jack",
+            n: 1,
+            output_format: "jpeg",
+            quality: "low",
+            size: "1024x1024"
+          }.to_json,
+          timeout: 120,
+          headers: {
+            "Authorization" => "Bearer test_token",
+            "Content-Type" => "application/json"
+          }
+        }
+      )
+    end
+
+    it 'returns the image from the API response' do
+      result = OpenAiService.get_chapter_image_based_on_description(image_description, characters, drawing_style)
+      expect(result).to eq(expected_response)
     end
   end
 end
