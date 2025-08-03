@@ -52,10 +52,16 @@ module Stories
       PROMPT
     }, T::Hash[Symbol, String])
 
-    GET_IMAGE_FROM_DESCRIPTION_ROLE = <<~PROMPT
+    GET_CHARACTER_IMAGE_FROM_DESCRIPTION_ROLE = <<~PROMPT
       You are a story writer for a children's book. You are given a description of a character and a drawing style.
       You must generate an image of the character in the given drawing style.
       The image must be a representation of the character and must contain only the character.
+    PROMPT
+
+    GET_IMAGE_FROM_DESCRIPTION_ROLE = <<~PROMPT
+      You are a story writer for a children's book. You are given a description of an image, a drawing style and the characters in the image.
+      You must generate an image that is representative of the description in the given drawing style.
+      The image must be a representation of the description and must contain all the mentioned characters.
     PROMPT
   end
 end
