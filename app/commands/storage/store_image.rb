@@ -17,9 +17,10 @@ class Storage::StoreImage < Command
   def execute
     raise "Data type #{@data_type} not supported" unless @data_type == "base64"
 
-    Rails.logger.info("Storing image in path #{@path}")
+    Rails.logger.info("Storing image")
     binary_image = binary_image_from_base64(@image_data)
     image_path = storage_service.store_image(binary_image, @path)
+    Rails.logger.info("Image stored in path #{image_path}")
     image_path
   end
 
