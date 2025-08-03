@@ -26,11 +26,21 @@ RSpec.describe Stories::CreateStoryChaptersWithImagesDescriptions do
           "chapters": [
             {
               "chapter": "Chapter 1",
-              "image_description": "A big cat and his friend the mouse"
+              "images": [
+                {
+                  "image_description": "A big cat and his friend the mouse",
+                  "characters": [ "big cat", "mouse" ]
+                }
+              ]
             },
             {
               "chapter": "Chapter 2",
-              "image_description": "A big cat and his friend the mouse dancing in the park"
+              "images": [
+                {
+                  "image_description": "A big cat and his friend the mouse dancing in the park",
+                  "characters": [ "big cat", "mouse" ]
+                }
+              ]
             }
           ]
         }'
@@ -58,9 +68,11 @@ RSpec.describe Stories::CreateStoryChaptersWithImagesDescriptions do
       expect(story.chapters.first.text_path).to eq("path/to/text")
       expect(story.chapters.first.image_description).to eq("A big cat and his friend the mouse")
       expect(story.chapters.first.order).to eq(1)
+      expect(story.chapters.first.image_characters).to eq([ "big cat", "mouse" ])
       expect(story.chapters.second.text_path).to eq("path/to/text")
       expect(story.chapters.second.image_description).to eq("A big cat and his friend the mouse dancing in the park")
       expect(story.chapters.second.order).to eq(2)
+      expect(story.chapters.second.image_characters).to eq([ "big cat", "mouse" ])
     end
 
     it 'associates the story chapters to the story' do

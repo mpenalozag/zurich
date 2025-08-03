@@ -34,8 +34,9 @@ class Stories::CreateStoryChaptersWithImagesDescriptions < Command
     chapters.each_with_index do |chapter, index|
       chapter_text = T.must(chapter["chapter"])
       image_description = T.must(T.must(chapter["images"])[0])["image_description"]
+      characters = T.must(T.must(chapter["images"])[0])["characters"]
       text_path = Storage::StoreText.new(text: chapter_text).run
-      Chapter.create!(order: index + 1, text_path: text_path, image_description: image_description, story: @story)
+      Chapter.create!(order: index + 1, text_path: text_path, image_description: image_description, story: @story, image_characters: characters)
     end
   end
 end
