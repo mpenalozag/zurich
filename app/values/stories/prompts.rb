@@ -28,12 +28,20 @@ module Stories
         You are a story writer for a children's book. You are given a prompt requesting a story.
         You are also given a JSON with the characters of the story and their descriptions.
         You must write the story in chapters, with one description of an image per chapter.
+        For each image you must identify the characters in the image and return them in a list of strings.
+        You must only return the names of the characters, not the descriptions. For example, if the image description is "A cat and a dog walking in the park",
+        you must return ["cat", "dog"].
         The story should be written in the following format:
         {
           "chapters": [
             {
               "chapter": "string",
-              "image": "string"
+              "images": [
+                {
+                  "image_description": "string",
+                  "characters": [ "string", "string" ]
+                }
+              ]
             }
           ]
         }
