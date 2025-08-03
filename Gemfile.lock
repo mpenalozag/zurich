@@ -381,6 +381,7 @@ GEM
       spoom (>= 1.7.0)
       thor (>= 1.2.0)
       yard-sorbet
+    test-prof (1.4.4)
     thor (1.4.0)
     thruster (0.1.14-aarch64-linux)
     thruster (0.1.14-x86_64-linux)
@@ -435,6 +436,7 @@ DEPENDENCIES
   sorbet-runtime
   sqlite3 (>= 2.1)
   tapioca (~> 0.17.0)
+  test-prof
   thruster
   tzinfo-data
 
