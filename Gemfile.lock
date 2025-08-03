@@ -72,9 +72,9 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    annotate (2.6.5)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
+    annotaterb (4.17.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt_pbkdf (1.1.1)
@@ -197,6 +197,8 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.0-aarch64-linux)
+    pg (1.6.0-x86_64-linux)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -413,7 +415,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  annotate
+  annotaterb
   bootsnap
   brakeman
   debug
@@ -421,6 +423,7 @@ DEPENDENCIES
   factory_bot_rails
   httparty (~> 0.23.1)
   kamal
+  pg (~> 1.6)
   pry (~> 0.15.2)
   puma (>= 5.0)
   rails (~> 8.0.2)

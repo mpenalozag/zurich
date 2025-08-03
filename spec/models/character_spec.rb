@@ -4,17 +4,21 @@
 #
 # Table name: characters
 #
-#  id          :integer          not null, primary key
-#  name        :string
+#  id          :bigint           not null, primary key
 #  description :text             not null
 #  image_path  :string
-#  story_id    :integer          not null
+#  name        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  story_id    :integer          not null
 #
 # Indexes
 #
 #  index_characters_on_story_id  (story_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (story_id => stories.id)
 #
 
 require 'rails_helper'

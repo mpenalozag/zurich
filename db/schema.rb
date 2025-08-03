@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_113526) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_123556) do
   create_table "chapters", force: :cascade do |t|
     t.string "text_path"
     t.string "image_path"
-    t.integer "story_id", null: false
+    t.bigint "story_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "image_description", null: false
     t.integer "order", null: false
+    t.string "image_characters", default: [], array: true
     t.index ["story_id"], name: "index_chapters_on_story_id"
   end
 

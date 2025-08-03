@@ -1,21 +1,25 @@
 # typed: false
-
 # == Schema Information
 #
 # Table name: chapters
 #
-#  id                :integer          not null, primary key
-#  text_path         :string
+#  id                :bigint           not null, primary key
+#  image_characters  :string           default([]), is an Array
+#  image_description :text             not null
 #  image_path        :string
-#  story_id          :integer          not null
+#  order             :integer          not null
+#  text_path         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  image_description :text             not null
-#  order             :integer          not null
+#  story_id          :bigint           not null
 #
 # Indexes
 #
 #  index_chapters_on_story_id  (story_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (story_id => stories.id)
 #
 
 require 'rails_helper'
