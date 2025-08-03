@@ -14,10 +14,16 @@ class Stories::CreateStory < Command
 
   sig { void }
   def execute
-    Stories::CreateStoryCharacters.new(@story_prompt, @story).run
-    Stories::CreateStoryCharactersImages.new(@story, @drawing_style).run
-    Stories::CreateStoryChaptersWithImagesDescriptions.new(@story_prompt, @story).run
-    Stories::CreateStoryChapterImages.new(@story, @drawing_style).run
+    begin
+      Stories::CreateStoryCharacters.new(@story_prompt, @story).run
+      Stories::CreateStoryCharactersImages.new(@story, @drawing_style).run
+      Stories::CreateStoryChaptersWithImagesDescriptions.new(@story_prompt, @story).run
+      Stories::CreateStoryChapterImages.new(@story, @drawing_style).run
+    rescue => e
+      Rails.logger.error("Story creation failed: #{e.message}")
+      @story.failed!
+      raise e
+    end
     @story.created!
   end
 end

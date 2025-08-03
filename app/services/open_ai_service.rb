@@ -6,6 +6,7 @@ class OpenAiService
   TEXT_GENERATION_MODEL = "gpt-4.1-nano"
   IMAGE_GENERATION_URL = T.let("#{API_BASE_URL}/images/generations", String)
   IMAGE_EDITING_URL = T.let("#{API_BASE_URL}/images/edits", String)
+  IMAGE_QUALITY = T.let("medium", String)
 
   class << self
     extend T::Sig
@@ -59,7 +60,7 @@ class OpenAiService
           prompt: prompt,
           n: 1,
           output_format: "jpeg",
-          quality: "low",
+          quality: IMAGE_QUALITY,
           size: "1024x1024"
         }.to_json
       )
@@ -83,7 +84,7 @@ class OpenAiService
           prompt: prompt,
           n: 1,
           output_format: "jpeg",
-          quality: "low",
+          quality: IMAGE_QUALITY,
           size: "1024x1024"
         },
       )
