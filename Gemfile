@@ -50,6 +50,8 @@ group :development, :test do
   gem "rspec-rails"
 
   gem "factory_bot_rails"
+
+  gem "shoulda-matchers"
 end
 
 gem "sorbet", group: :development

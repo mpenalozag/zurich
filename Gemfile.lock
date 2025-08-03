@@ -318,6 +318,8 @@ GEM
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    shoulda-matchers (6.5.0)
+      activesupport (>= 5.2.0)
     sidekiq (8.0.6)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
@@ -424,6 +426,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-rails-omakase
   ruby-openai (~> 8.1)
+  shoulda-matchers
   sidekiq
   solid_cable
   solid_cache
