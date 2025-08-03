@@ -18,5 +18,6 @@ class Stories::CreateStory < Command
     Stories::CreateStoryCharactersImages.new(@story, @drawing_style).run
     Stories::CreateStoryChaptersWithImagesDescriptions.new(@story_prompt, @story).run
     Stories::CreateStoryChapterImages.new(@story, @drawing_style).run
+    @story.created!
   end
 end
