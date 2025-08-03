@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_094828) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_100916) do
   create_table "chapters", force: :cascade do |t|
     t.string "text_path"
     t.string "image_path"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_094828) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "creating"
   end
 
   add_foreign_key "chapters", "stories"
