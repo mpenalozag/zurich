@@ -57,8 +57,10 @@ RSpec.describe Stories::CreateStoryChaptersWithImagesDescriptions do
       expect(story.chapters.count).to eq(2)
       expect(story.chapters.first.text_path).to eq("path/to/text")
       expect(story.chapters.first.image_description).to eq("A big cat and his friend the mouse")
+      expect(story.chapters.first.order).to eq(1)
       expect(story.chapters.second.text_path).to eq("path/to/text")
       expect(story.chapters.second.image_description).to eq("A big cat and his friend the mouse dancing in the park")
+      expect(story.chapters.second.order).to eq(2)
     end
 
     it 'associates the story chapters to the story' do
