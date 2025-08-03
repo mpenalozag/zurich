@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string
-#  description :text
+#  description :text             not null
 #  image_path  :string
 #  story_id    :integer          not null
 #  created_at  :datetime         not null
