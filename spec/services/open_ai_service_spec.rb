@@ -182,9 +182,12 @@ RSpec.describe OpenAiService do
     let(:expected_response) { "b64_image" }
     let(:mock_response) { { "data" => [ { "b64_json" => expected_response } ] } }
     let(:mock_client) { instance_double(OpenAI::Client) }
+    let(:mock_file) { instance_double(File) }
 
     before do
       allow(HTTParty).to receive(:post).and_return(mock_response)
+      allow(File).to receive(:open).and_return(mock_file)
+      allow(mock_file).to receive(:close)
       stub_const("OpenAiService::IMAGE_EDITING_URL", "https://some-url.com")
       stub_const("Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE", "Some prompt\n")
     end
@@ -196,17 +199,17 @@ RSpec.describe OpenAiService do
         "https://some-url.com", {
           body: {
             model: "gpt-image-1",
-            image: characters_images_path,
+            image: [ mock_file, mock_file ],
             prompt: "Some prompt\nJohnny the cat and Jack the dog walking in the park\nThe image should be a #{drawing_style} style\nThe image must contain the following characters: Johnny, Jack",
             n: 1,
             output_format: "jpeg",
             quality: "low",
             size: "1024x1024"
-          }.to_json,
+          },
           timeout: 120,
           headers: {
             "Authorization" => "Bearer test_token",
-            "Content-Type" => "application/json"
+            "Content-Type" => "multipart/form-data"
           }
         }
       )

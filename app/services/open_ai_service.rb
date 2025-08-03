@@ -72,20 +72,23 @@ class OpenAiService
       characters_string = characters.join(", ")
       characters_text = "\nThe image must contain the following characters: #{characters_string}"
       prompt = Stories::Prompts::GET_IMAGE_FROM_DESCRIPTION_ROLE + image_description + style_string + characters_text
+      image_files = characters_images_path.map { |path| File.open(path, "rb") }
 
       response = HTTParty.post(IMAGE_EDITING_URL,
         timeout: 120,
-        headers: request_headers,
+        headers: request_headers.merge("Content-Type" => "multipart/form-data"),
         body: {
           model: IMAGE_GENERATION_MODEL,
-          image: characters_images_path,
+          image: image_files,
           prompt: prompt,
           n: 1,
           output_format: "jpeg",
           quality: "low",
           size: "1024x1024"
-        }.to_json
+        },
       )
+
+      image_files.each(&:close)
       response.dig("data", 0, "b64_json")
     end
 
