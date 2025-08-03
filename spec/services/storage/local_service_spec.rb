@@ -8,10 +8,14 @@ RSpec.describe Storage::LocalService do
   let(:service) { described_class.new }
   let(:image) { 'some_image_binary' }
   let(:path) { 'some_path/' }
+  let(:text) { 'some_text' }
 
   before do
     stub_const('Storage::LocalService::BASE_FOLDER', 'cool_folder')
     stub_const('Storage::LocalService::IMAGE_FOLDER', 'cool_image_folder')
+    stub_const('Storage::LocalService::TEXT_FOLDER', 'cool_text_folder')
+
+    travel_to Time.zone.local(2025, 1, 1, 12, 0, 0)
   end
 
   it_behaves_like 'storage_service'
@@ -23,15 +27,29 @@ RSpec.describe Storage::LocalService do
     end
   end
 
+  describe '#store_text' do
+    let(:mock_file) { instance_double(File) }
+    let(:expected_path) { Rails.root.join('cool_folder', 'cool_text_folder', '20250101_120000_000.txt') }
+
+    before do
+      allow(File).to receive(:open).and_yield(mock_file)
+      allow(mock_file).to receive(:write)
+    end
+
+    it 'stores the text in the correct location' do
+      service.store_text(text)
+
+      expect(File).to have_received(:open).with(expected_path, "w")
+      expect(mock_file).to have_received(:write).with(text)
+    end
+  end
+
   describe '#store_image' do
     let(:mock_file) { instance_double(File) }
     let(:expected_path) { Rails.root.join('cool_folder', 'cool_image_folder', 'some_path/20250101_120000_000.jpeg') }
 
     before do
-      travel_to Time.zone.local(2025, 1, 1, 12, 0, 0)
-
       allow(FileUtils).to receive(:mkdir_p)
-
       allow(File).to receive(:open).and_yield(mock_file)
       allow(mock_file).to receive(:write)
     end
