@@ -54,10 +54,21 @@ RSpec.describe Stories::GetCharactersWithImages do
     end
 
     context 'when setting the image path for each character' do
-      it 'sets the correct path' do
+      it 'returns the characters with the image path' do
         result = perform
-        expect(result[0]["image_path"]).to eq("image_path")
-        expect(result[1]["image_path"]).to eq("image_path")
+        expect(result).to eq(
+        [
+          {
+            "name" => "John",
+            "description" => "A man with a beard",
+            "image_path" => "image_path"
+          },
+          {
+            "name" => "Jane",
+            "description" => "A woman with a beard",
+            "image_path" => "image_path"
+          }
+        ])
       end
     end
   end

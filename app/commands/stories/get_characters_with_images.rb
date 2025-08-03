@@ -13,6 +13,7 @@ class Stories::GetCharactersWithImages < Command
 
   sig { returns(T::Array[T::Hash[T.untyped, T.untyped]]) }
   def execute
+    Rails.logger.info("Getting images for characters")
     @characters.map do |character|
       character_description = T.must(character["description"])
       b64_image = OpenAiService.get_character_image_from_description(character_description, @drawing_style)
@@ -20,6 +21,7 @@ class Stories::GetCharactersWithImages < Command
       character["image_path"] = image_path
       character
     end
+    Rails.logger.info("Got images for characters")
     @characters
   end
 end
