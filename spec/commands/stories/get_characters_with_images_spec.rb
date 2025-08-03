@@ -33,7 +33,7 @@ RSpec.describe Stories::GetCharactersWithImages do
     end
 
     before do
-      allow(OpenAiService).to receive(:get_image_from_description).and_return("b64_image")
+      allow(OpenAiService).to receive(:get_character_image_from_description).and_return("b64_image")
       allow(Storage::StoreImage).to receive(:new).and_return(storage_service)
       allow(storage_service).to receive(:run).and_return("image_path")
     end
@@ -41,8 +41,8 @@ RSpec.describe Stories::GetCharactersWithImages do
     context 'when calling the open AI service to generate images' do
       it 'uses the correct parameters' do
         perform
-        expect(OpenAiService).to have_received(:get_image_from_description).with(characters["characters"][0]["description"], drawing_style)
-        expect(OpenAiService).to have_received(:get_image_from_description).with(characters["characters"][1]["description"], drawing_style)
+        expect(OpenAiService).to have_received(:get_character_image_from_description).with(characters["characters"][0]["description"], drawing_style)
+        expect(OpenAiService).to have_received(:get_character_image_from_description).with(characters["characters"][1]["description"], drawing_style)
       end
     end
 

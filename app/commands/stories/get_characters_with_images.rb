@@ -15,7 +15,7 @@ class Stories::GetCharactersWithImages < Command
   def execute
     @characters.map do |character|
       character_description = T.must(character["description"])
-      b64_image = OpenAiService.get_image_from_description(character_description, @drawing_style)
+      b64_image = OpenAiService.get_character_image_from_description(character_description, @drawing_style)
       image_path = Storage::StoreImage.new(image_data: b64_image, path: "characters/", data_type: "base64").run
       character["image_path"] = image_path
       character
