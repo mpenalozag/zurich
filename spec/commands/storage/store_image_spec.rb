@@ -36,7 +36,7 @@ RSpec.describe Storage::StoreImage do
       it 'stores the image in the storage' do
         perform
 
-        expect(Rails.logger).to have_received(:info).with("Storing image in path characters/")
+        expect(Rails.logger).to have_received(:info).with("Storing image")
         expect(Base64).to have_received(:decode64).with("b64_image")
         expect(storage_service).to have_received(:store_image).with("decoded_binary_data", "characters/")
       end
