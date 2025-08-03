@@ -4,6 +4,11 @@ class Storage::ProductionService
   extend T::Sig
   include StorageService
 
+  sig { override.params(text: String).returns(String) }
+  def store_text(text)
+    raise "Not implemented"
+  end
+
   sig { override.params(image: String, path: String).returns(String) }
   def store_image(image, path)
     raise "Not implemented"

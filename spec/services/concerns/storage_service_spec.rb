@@ -10,4 +10,5 @@ require "rails_helper"
 RSpec.shared_examples "storage_service" do
   it { is_expected.to respond_to(:store_image) }
   it { is_expected.to respond_to(:retrieve_image) }
+  it { is_expected.to respond_to(:store_text) }
 end

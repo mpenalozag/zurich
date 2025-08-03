@@ -6,6 +6,9 @@ module StorageService
 
   interface!
 
+  sig { abstract.params(text: String).returns(String) }
+  def store_text(text); end
+
   sig { abstract.params(image: String, path: String).returns(String) }
   def store_image(image, path); end
 
