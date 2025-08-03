@@ -6,6 +6,7 @@
 
 
 class Story
+  include GeneratedAssociationMethods
   include GeneratedAttributeMethods
   extend CommonRelationMethods
   extend GeneratedRelationMethods
@@ -331,6 +332,22 @@ class Story
 
     sig { returns(::Story) }
     def third_to_last!; end
+  end
+
+  module GeneratedAssociationMethods
+    sig { returns(T::Array[T.untyped]) }
+    def character_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def character_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `Story` class because it declared `has_many :characters`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::Character::PrivateCollectionProxy) }
+    def characters; end
+
+    sig { params(value: T::Enumerable[::Character]).void }
+    def characters=(value); end
   end
 
   module GeneratedAssociationRelationMethods
