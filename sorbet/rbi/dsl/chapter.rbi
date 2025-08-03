@@ -644,6 +644,51 @@ class Chapter
     sig { void }
     def id_will_change!; end
 
+    sig { returns(T.nilable(T::Array[::String])) }
+    def image_characters; end
+
+    sig { params(value: T.nilable(T::Array[::String])).returns(T.nilable(T::Array[::String])) }
+    def image_characters=(value); end
+
+    sig { returns(T::Boolean) }
+    def image_characters?; end
+
+    sig { returns(T.nilable(T::Array[::String])) }
+    def image_characters_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def image_characters_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def image_characters_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(T::Array[::String]), T.nilable(T::Array[::String])])) }
+    def image_characters_change; end
+
+    sig { returns(T.nilable([T.nilable(T::Array[::String]), T.nilable(T::Array[::String])])) }
+    def image_characters_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def image_characters_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Array[::String])) }
+    def image_characters_in_database; end
+
+    sig { returns(T.nilable([T.nilable(T::Array[::String]), T.nilable(T::Array[::String])])) }
+    def image_characters_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def image_characters_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Array[::String])) }
+    def image_characters_previously_was; end
+
+    sig { returns(T.nilable(T::Array[::String])) }
+    def image_characters_was; end
+
+    sig { void }
+    def image_characters_will_change!; end
+
     sig { returns(::String) }
     def image_description; end
 
@@ -789,6 +834,9 @@ class Chapter
     def restore_id_value!; end
 
     sig { void }
+    def restore_image_characters!; end
+
+    sig { void }
     def restore_image_description!; end
 
     sig { void }
@@ -823,6 +871,12 @@ class Chapter
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_id_value?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable([T.nilable(T::Array[::String]), T.nilable(T::Array[::String])])) }
+    def saved_change_to_image_characters; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_image_characters?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::String, ::String])) }
     def saved_change_to_image_description; end
@@ -1003,6 +1057,9 @@ class Chapter
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_id_value?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_image_characters?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_image_description?(from: T.unsafe(nil), to: T.unsafe(nil)); end
