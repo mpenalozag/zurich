@@ -1,4 +1,5 @@
 # typed: false
+
 # == Schema Information
 #
 # Table name: chapters
