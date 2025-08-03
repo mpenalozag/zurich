@@ -66,8 +66,8 @@ class OpenAiService
       response.dig("data", 0, "b64_json")
     end
 
-    sig { params(image_description: String, characters: T::Array[String], drawing_style: String).returns(String) }
-    def get_chapter_image_based_on_description(image_description, characters, drawing_style)
+    sig { params(image_description: String, characters_images_path: T::Array[String], characters: T::Array[String], drawing_style: String).returns(String) }
+    def get_chapter_image_based_on_description(image_description, characters_images_path, characters, drawing_style)
       style_string = "\nThe image should be a #{drawing_style} style"
       characters_string = characters.join(", ")
       characters_text = "\nThe image must contain the following characters: #{characters_string}"
@@ -78,6 +78,7 @@ class OpenAiService
         headers: request_headers,
         body: {
           model: IMAGE_GENERATION_MODEL,
+          image: characters_images_path,
           prompt: prompt,
           n: 1,
           output_format: "jpeg",

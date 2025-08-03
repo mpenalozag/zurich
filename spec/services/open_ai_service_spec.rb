@@ -138,7 +138,7 @@ RSpec.describe OpenAiService do
     end
   end
 
-  describe '#get_image_from_description' do
+  describe '#get_character_image_from_description' do
     let(:character_description) { "A brave knight with a sword" }
     let(:drawing_style) { "cartoon" }
     let(:expected_response) { "b64_image" }
@@ -176,6 +176,7 @@ RSpec.describe OpenAiService do
 
   describe '#get_chapter_image_based_on_description' do
     let(:image_description) { "Johnny the cat and Jack the dog walking in the park" }
+    let(:characters_images_path) { [ 'characters/johnny.jpg', 'characters/jack.jpg' ] }
     let(:characters) { [ 'Johnny', 'Jack' ] }
     let(:drawing_style) { "cartoon" }
     let(:expected_response) { "b64_image" }
@@ -189,12 +190,13 @@ RSpec.describe OpenAiService do
     end
 
     it 'calls the OpenAI client with correct parameters' do
-      OpenAiService.get_chapter_image_based_on_description(image_description, characters, drawing_style)
+      OpenAiService.get_chapter_image_based_on_description(image_description, characters_images_path, characters, drawing_style)
 
       expect(HTTParty).to have_received(:post).with(
         "https://some-url.com", {
           body: {
             model: "gpt-image-1",
+            image: characters_images_path,
             prompt: "Some prompt\nJohnny the cat and Jack the dog walking in the park\nThe image should be a #{drawing_style} style\nThe image must contain the following characters: Johnny, Jack",
             n: 1,
             output_format: "jpeg",
@@ -211,7 +213,7 @@ RSpec.describe OpenAiService do
     end
 
     it 'returns the image from the API response' do
-      result = OpenAiService.get_chapter_image_based_on_description(image_description, characters, drawing_style)
+      result = OpenAiService.get_chapter_image_based_on_description(image_description, characters_images_path, characters, drawing_style)
       expect(result).to eq(expected_response)
     end
   end
