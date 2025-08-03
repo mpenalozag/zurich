@@ -644,6 +644,51 @@ class Chapter
     sig { void }
     def id_will_change!; end
 
+    sig { returns(::String) }
+    def image_description; end
+
+    sig { params(value: ::String).returns(::String) }
+    def image_description=(value); end
+
+    sig { returns(T::Boolean) }
+    def image_description?; end
+
+    sig { returns(T.nilable(::String)) }
+    def image_description_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def image_description_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def image_description_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def image_description_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def image_description_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def image_description_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def image_description_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def image_description_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def image_description_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def image_description_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def image_description_was; end
+
+    sig { void }
+    def image_description_will_change!; end
+
     sig { returns(T.nilable(::String)) }
     def image_path; end
 
@@ -689,6 +734,51 @@ class Chapter
     sig { void }
     def image_path_will_change!; end
 
+    sig { returns(::Integer) }
+    def order; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def order=(value); end
+
+    sig { returns(T::Boolean) }
+    def order?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def order_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def order_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def order_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def order_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def order_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def order_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def order_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def order_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def order_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def order_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def order_was; end
+
+    sig { void }
+    def order_will_change!; end
+
     sig { void }
     def restore_created_at!; end
 
@@ -699,7 +789,13 @@ class Chapter
     def restore_id_value!; end
 
     sig { void }
+    def restore_image_description!; end
+
+    sig { void }
     def restore_image_path!; end
+
+    sig { void }
+    def restore_order!; end
 
     sig { void }
     def restore_story_id!; end
@@ -728,11 +824,23 @@ class Chapter
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_id_value?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_image_description; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_image_description?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_image_path; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_image_path?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_order; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_order?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def saved_change_to_story_id; end
@@ -897,7 +1005,13 @@ class Chapter
     def will_save_change_to_id_value?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_image_description?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_image_path?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_order?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_story_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end

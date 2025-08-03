@@ -4,12 +4,14 @@
 #
 # Table name: chapters
 #
-#  id         :integer          not null, primary key
-#  text_path  :string
-#  image_path :string
-#  story_id   :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :integer          not null, primary key
+#  text_path         :string
+#  image_path        :string
+#  story_id          :integer          not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  image_description :text             not null
+#  order             :integer          not null
 #
 # Indexes
 #
@@ -27,6 +29,8 @@ RSpec.describe Chapter, type: :model do
     it { is_expected.to have_db_column(:text_path).of_type(:string) }
     it { is_expected.to have_db_column(:image_path).of_type(:string) }
     it { is_expected.to have_db_column(:story_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:image_description).of_type(:text) }
+    it { is_expected.to have_db_column(:order).of_type(:integer) }
   end
 
   describe "foreign_keys" do
@@ -35,6 +39,19 @@ RSpec.describe Chapter, type: :model do
 
     it "returns associated story" do
       expect(chapter.story).to eq(story)
+    end
+  end
+
+  describe "validations" do
+    let(:story) { create(:story) }
+    let(:chapter) { create(:chapter, story: story) }
+
+    it "validates presence of order" do
+      expect(chapter.order).to be_present
+    end
+
+    it "validates presence of image_description" do
+      expect(chapter.image_description).to be_present
     end
   end
 end
