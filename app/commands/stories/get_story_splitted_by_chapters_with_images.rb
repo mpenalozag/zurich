@@ -13,7 +13,9 @@ class Stories::GetStorySplittedByChaptersWithImages < Command
 
   sig { returns(T::Hash[T.untyped, T.untyped]) }
   def execute
+    Rails.logger.info("Getting story splitted by chapters and images")
     response = OpenAiService.get_story_splitted_by_chapters_and_images(@story_prompt, @characters)
+    Rails.logger.info("Got story splitted by chapters and images")
     JSON.parse(response)
   end
 end

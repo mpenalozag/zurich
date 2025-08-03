@@ -12,7 +12,9 @@ class Stories::GetCharactersFromPrompt < Command
 
   sig { returns(T::Hash[T.untyped, T.untyped]) }
   def execute
+    Rails.logger.info("Getting characters from prompt")
     response = OpenAiService.get_characters_from_prompt(@story_prompt)
+    Rails.logger.info("Got characters from prompt")
     JSON.parse(response)
   end
 end
