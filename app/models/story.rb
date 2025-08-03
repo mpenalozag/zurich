@@ -10,7 +10,7 @@
 #
 
 class Story < ApplicationRecord
-  enum status: {
+  enum :status, {
     created: "created",
     creating: "creating",
     failed: "failed"
