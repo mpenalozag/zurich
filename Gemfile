@@ -70,3 +70,5 @@ gem "httparty", "~> 0.23.1"
 gem "pry", "~> 0.15.2"
 
 gem "pg", "~> 1.6"
+
+gem "dry-validation-rails", "~> 0.1.1"
