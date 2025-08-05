@@ -9,6 +9,8 @@ RSpec.describe OpenAiService do
     stub_const("OpenAiService::IMAGE_GENERATION_MODEL", "gpt-image-1")
     stub_const("OpenAiService::TEXT_GENERATION_MODEL", "gpt-4.1-nano")
     stub_const("OpenAiService::IMAGE_GENERATION_URL", "https://api.openai.com/v1/images/generations")
+    stub_const("OpenAiService::IMAGE_EDITING_URL", "https://api.openai.com/v1/images/edits")
+    stub_const("OpenAiService::IMAGE_QUALITY", "low")
   end
 
   describe '#constants' do
