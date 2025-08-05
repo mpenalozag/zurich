@@ -8,5 +8,11 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :stories, only: [ :create ]
+  resources :stories, only: [ :index, :create ] do
+    collection do
+      post :create_story
+      get :get_stories
+      get :get_story
+    end
+  end
 end
